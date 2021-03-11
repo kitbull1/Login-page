@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="theme-color" content="#29d8db" />
+    <link
+      rel="shortcut icon"
+      href="https://electura.co/wp-content/uploads/2020/07/cropped-logo-3-192x192.png"
+      type="image/png"
+    />
+    <!--<link media="all" href="https://electura.co/wp-content/cache/autoptimize/css/autoptimize_6afaeca8aba97a3738d1d0395a1d105d.css" rel="stylesheet"> -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+
+    <link rel="stylesheet" href={% static "frontend-style.css" %} />
+  </head>
+  <body class="vsc-initialized">
+    <div class="spinner-loading-overlay"></div>
+    <div class="login-modal-div">
+      <!--  <div class="close-div"><span class="close">&times;</span></div> -->
+      <div class="center">
+        <a href="https://electura.co">
+          <img
+            width="200px"
+            src="https://electura.co/wp-content/uploads/2020/07/cropped-logo-1-160x49.png"
+          />
+        </a>
+      </div>
+
+      <div class="white-bg center modal-header">
+        <div class="login-register-div">
+          <input id="tab1" type="radio" name="tabs" checked="" />
+          <label class="tab-label" for="tab1">Sign In</label>
+
+          <input id="tab2" type="radio" name="tabs" />
+          <label class="tab-label" for="tab2">Sign Up</label>
+
+          <section id="content1">
+            <form method="POST" class="login-form" id="Login" action="login">
+              {% csrf_token %}
+              <input type="hidden" name="reqType" value="Login" />
+              <div class="modal-form-group">
+                <div class="extra"></div>
+              </div>
+              <div class="modal-form-group">
+                <i class="input-icon material-icons">account_circle</i>
+                <input
+                  name="user"
+                  id="luser"
+                  required="required"
+                  type="text"
+                  class="modal-form-input"
+                  placeholder="Username or email"
+                />
+              </div>
+              <div class="modal-form-group">
+                <i class="input-icon material-icons">lock</i>
+                <input
+                  name="pass"
+                  id="password"
+                  type="password"
+                  required="required"
+                  class="modal-form-input"
+                  placeholder="Password"
+                />
+              </div>
+              <div class="modal-form-group left">
+                <input name="rem" type="hidden" value="false" />
+                <input
+                  name="to"
+                  type="hidden"
+                  value="https://www.electura.co"
+                />
+                <input name="rem" type="checkbox" checked="" />
+                <label class="modal-form-label" for="remember"
+                  >Remember me</label
+                >
+                <a class="pull-right forgot-link">Forgot Password</a>
+              </div>
+              <div class="modal-form-group left">
+                <center><div id="loginCaptcha"></div></center>
+              </div>
+              <button class="btn btn-blue signin-button" type="submit">
+                Sign In
+              </button>
+            </form>
+          </section>
+          <section id="content2">
+            <form
+              method="POST"
+              class="login-form"
+              id="Register"
+              action="register"
+            >
+              {% csrf_token %}
+              <input type="hidden" name="reqType" value="Register" />
+              <div class="modal-form-group">
+                <div class="extra"></div>
+              </div>
+              <div class="modal-form-group">
+                <i class="input-icon material-icons">email</i>
+                <input
+                  name="email"
+                  id="email"
+                  type="email"
+                  value=""
+                  required="required"
+                  class="modal-form-input"
+                  placeholder="E-mail"
+                />
+              </div>
+              <div class="modal-form-group">
+                <i class="input-icon material-icons">Username</i>
+                <input
+                  name="username"
+                  id="username"
+                  type="text"
+                  value=""
+                  required="required"
+                  class="modal-form-input"
+                  placeholder="Username"
+                />
+              </div>
+              <div class="modal-form-group">
+                <i class="input-icon material-icons">lock</i>
+                <input
+                  name="pass"
+                  id="reg-password"
+                  type="password"
+                  required="required"
+                  class="modal-form-input"
+                  placeholder="Password"
+                />
+              </div>
+
+              <div class="modal-form-group">
+                <center><div id="registerCaptcha"></div></center>
+              </div>
+              <input name="to" type="hidden" value="https://www.electura.co" />
+              <button class="btn btn-blue signup-button" type="submit">
+                Sign Up
+              </button>
+            </form>
+          </section>
+          <div class="social-signin-div">
+            <div class="social-divider">
+              <span>or</span>
+            </div>
+            <div class="google-div social-div pull-left">
+              <a
+                id="glogin"
+                href="{% url 'social:begin' 'google-oauth2' %}"
+                class="btn btn-social btn-google"
+              >
+                <span class="fa fa-google"></span>
+              </a>
+            </div>
+            <div class="facebook-div social-div">
+              <a
+                id="fblogin"
+                class="btn btn-social btn-facebook"
+                href="{% url 'social:begin' 'facebook' %}"
+              >
+                <span class="fa fa-facebook"></span>
+              </a>
+            </div>
+            <p></p>
+
+            <div
+              style="
+                padding: 10px 0px;
+                font-size: 14px;
+                font-weight: 500;
+                padding-top: 50px;
+              "
+            >
+              <a
+                href="https://electura.co/about-us/"
+                style="color: #29d8db"
+                target="_blank"
+                >Why you should join us</a
+              >
+            </div>
+            <div class="tnc-div">
+              By creating this account, you agree to our
+              <a href="https://electura.co/privacy_policy_tnc/" target="_blank"
+                >Privacy & Cookies policy</a
+              >
+              .
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      {% for message in messages %}
+      <h3>{{message}}</h3>
+      {% endfor %}
+    </div>
+  </body>
+</html>
